@@ -1,31 +1,40 @@
-#include <iostream>
-#include <limits>
+#include "utils.hpp"
 #include <fstream>
 
-void clearInputBuffer() {
-	std::cin.clear();
-	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-}
-
-void validateInput(int input, int rng_start, int rng_end) {
-	if (std::cin.fail() || (input < rng_start || input > rng_end)) {
-		std::cout << "\nInvalid input, please try again.\n";
+void launchTask(std::fstream *file, int choice) {
+	switch(choice) {
+		case 1:
+			fileio::task::wordCount(file);
+			break;
 	}
-	clearInputBuffer();
 }
 
 void appMenu() {
-	int userChoice = 0;
+	int	userChoice = 0;
 
 	std::cout 
-	<< "| Data Processing Application |\n"
-	<< "Select task:\n"
-	<< "1. Word counter\n\n";
+		<< "| Data Processing Application |\n"
+		<< "Please provide the name of the file to open before selecting a task.\n"
+		<< "The file name can be an absolute path."
+		<< "Key in the file name to open: \n";
+
+	std::fstream file(fileio::getFile(), std::ios::in | std::ios::out | std::ios::app);
+
+	if (!file.is_open()) {
+		std::cerr << "Failed to open the file. Exiting program.";
+		return;
+	} else {
+		std::cout << "\n\nSuccessfully opened the file.\n";
+		std::cout
+			<< "Tasks available:\n"
+			<< "1. Word count\n"
+			<< "Select task to perform [1]: ";
+	}
 	do {
 		std::cin >> userChoice;
 		validateInput(userChoice, 1, 1);
 	} while(!(userChoice >= 1 && userChoice <= 1));
-
+	launchTask(&file, userChoice);
 }
 
 int main() {

@@ -30,4 +30,7 @@ This is the capstone project for Microsoft's Intermediate C++ Programming Techni
 ---
 
 ## Data Processing Tasks Implemented
-TBD
+This application takes a text file and is able to perform the following tasks:
+
+1. Word count
+Counts the number of words in the text file and outputs the total into the console.
