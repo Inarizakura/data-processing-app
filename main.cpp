@@ -6,9 +6,13 @@ void launchTask(std::fstream *file, int choice) {
 		case 1:
 			fileio::task::wordCount(file);
 			break;
+		case 2:
+			fileio::task::charCount(file);
+			break;
 	}
 }
 
+// Display the application menu.
 void appMenu() {
 	int	userChoice = 0;
 
@@ -28,12 +32,13 @@ void appMenu() {
 		std::cout
 			<< "Tasks available:\n"
 			<< "1. Word count\n"
+			<< "2. Character count\n"
 			<< "Select task to perform [1]: ";
 	}
 	do {
 		std::cin >> userChoice;
-		validateInput(userChoice, 1, 1);
-	} while(!(userChoice >= 1 && userChoice <= 1));
+		validateInput(userChoice, 1, 2);
+	} while(!(userChoice >= 1 && userChoice <= 2));
 	launchTask(&file, userChoice);
 }
 

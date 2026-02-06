@@ -12,5 +12,6 @@ namespace fileio {
 	void		resetFile(std::fstream *file);
 	namespace task {
 		void 	wordCount(std::fstream *file);
+		void 	charCount(std::fstream *file);
 	}
 }

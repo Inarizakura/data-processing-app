@@ -3,6 +3,7 @@
 #include <filesystem>
 
 namespace fileio {
+	// Prompts the user for the text file path and validates it before returning the path.
 	std::string getFile() {
 		std::filesystem::path	file_name;
 		
@@ -17,25 +18,40 @@ namespace fileio {
 		std::cout << file_name.string();
 		return file_name.string();
 	}
+	// Returns the "cursor" back to the top of the text file.
 	void	resetFile(std::fstream *file) {
 		(*file).clear();
 		(*file).seekg(0);
 	}
 
 	namespace task {
+		// Counts the number of words in the text file and outputs it to the console.
 		void wordCount(std::fstream *file) {
 			std::string line;
-			int			word_count = 0;
+			int			count = 0;
 
 			while(std::getline(*file, line)) {
 				std::stringstream	ss(line);
 				std::string			word = "";
 
 				while (ss >> word) {
-					word_count++;
+					count++;
 				}
 			}
-			std::cout << "Total word count of the file is: " << word_count << std::endl;
+			std::cout << "Total word count of the file is: " << count << std::endl;
+			resetFile(file);
+		}
+
+		void charCount(std::fstream  *file) {
+			std::string	line;
+			int			count = 0;
+
+			while(std::getline(*file, line)) {
+				for(size_t i = 0; i < line.length(); i++) {
+					count++;
+				}
+			}
+			std::cout << "Total character count of the file is: " << count << std::endl;
 			resetFile(file);
 		}
 	}

@@ -34,3 +34,6 @@ This application takes a text file and is able to perform the following tasks:
 
 1. Word count
 Counts the number of words in the text file and outputs the total into the console.
+
+2. Character count
+Counts the number of characters in the text file and outputs the total into the console.
