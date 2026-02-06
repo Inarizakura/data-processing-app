@@ -32,8 +32,14 @@ This is the capstone project for Microsoft's Intermediate C++ Programming Techni
 ## Data Processing Tasks Implemented
 This application takes a text file and is able to perform the following tasks:
 
-1. Word count
+1. Display text file
+Prints the contents of the text file onto the console.
+
+2. Word count
 Counts the number of words in the text file and outputs the total into the console.
 
 2. Character count
 Counts the number of characters in the text file and outputs the total into the console.
+
+4. Append text
+Appends text onto the end of the text file.

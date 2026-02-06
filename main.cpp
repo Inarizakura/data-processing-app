@@ -4,10 +4,16 @@
 void launchTask(std::fstream *file, int choice) {
 	switch(choice) {
 		case 1:
-			fileio::task::wordCount(file);
+			fileio::task::displayFile(file);
 			break;
 		case 2:
+			fileio::task::wordCount(file);
+			break;
+		case 3:
 			fileio::task::charCount(file);
+			break;
+		case 4:
+			fileio::task::appdText(file);
 			break;
 	}
 }
@@ -31,14 +37,16 @@ void appMenu() {
 		std::cout << "\n\nSuccessfully opened the file.\n";
 		std::cout
 			<< "Tasks available:\n"
-			<< "1. Word count\n"
-			<< "2. Character count\n"
-			<< "Select task to perform [1]: ";
+			<< "1. Print text file to console\n"
+			<< "2. Word count\n"
+			<< "3. Character count\n"
+			<< "4. Append text to end of the file\n"
+			<< "Select task to perform [1 - 4]: ";
 	}
 	do {
 		std::cin >> userChoice;
-		validateInput(userChoice, 1, 2);
-	} while(!(userChoice >= 1 && userChoice <= 2));
+		validateInput(userChoice, 1, 3);
+	} while(!(userChoice >= 1 && userChoice <= 3));
 	launchTask(&file, userChoice);
 }
 

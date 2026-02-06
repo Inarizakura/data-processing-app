@@ -4,7 +4,7 @@
 
 namespace fileio {
 	// Prompts the user for the text file path and validates it before returning the path.
-	std::string getFile() {
+	std::string	getFile() {
 		std::filesystem::path	file_name;
 		
 		do {
@@ -19,14 +19,23 @@ namespace fileio {
 		return file_name.string();
 	}
 	// Returns the "cursor" back to the top of the text file.
-	void	resetFile(std::fstream *file) {
+	void		resetFile(std::fstream *file) {
 		(*file).clear();
 		(*file).seekg(0);
 	}
 
 	namespace task {
+		// Display text file contents on the console.
+		void	displayFile(std::fstream *file) {
+			std::string	line;
+
+			while(std::getline(*file, line)) {
+				std::cout << line << std::endl;
+			}
+			resetFile(file);
+		}
 		// Counts the number of words in the text file and outputs it to the console.
-		void wordCount(std::fstream *file) {
+		void	wordCount(std::fstream *file) {
 			std::string line;
 			int			count = 0;
 
@@ -41,8 +50,8 @@ namespace fileio {
 			std::cout << "Total word count of the file is: " << count << std::endl;
 			resetFile(file);
 		}
-
-		void charCount(std::fstream  *file) {
+		// Counts the number of characters in the text file and outputs it to the console.
+		void	charCount(std::fstream  *file) {
 			std::string	line;
 			int			count = 0;
 
@@ -52,6 +61,16 @@ namespace fileio {
 				}
 			}
 			std::cout << "Total character count of the file is: " << count << std::endl;
+			resetFile(file);
+		}
+		// Appends text onto the end of the file.
+		void	appdText(std::fstream *file) {
+			std::string text;
+
+			std::cout << "Text to append to the end of the file: ";
+			std::getline(std::cin, text);
+			validateInput();
+			*file << text << std::endl;
 			resetFile(file);
 		}
 	}
