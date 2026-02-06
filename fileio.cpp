@@ -1,8 +1,19 @@
 #include "utils.hpp"
-#include <fstream>
 #include <filesystem>
 
-namespace fileio {
+void		promptContinue(std::fstream *file) {
+	char userChoice;
+	std::cout << "\nPerform another task? [ y / n ]: ";
+	do {
+		std::cin >> userChoice;
+		validateInput(userChoice);
+	} while (!(userChoice == 'y' || userChoice == 'Y' || userChoice == 'n' || userChoice == 'N'));
+	if (userChoice == 'y' || userChoice == 'Y') {
+		promptUser(file);
+	}
+}
+
+namespace	fileio {
 	// Prompts the user for the text file path and validates it before returning the path.
 	std::string	getFile() {
 		std::filesystem::path	file_name;
@@ -15,7 +26,6 @@ namespace fileio {
 				return getFile();
 			}
 		} while (!(file_name.extension() == ".txt"));
-		std::cout << file_name.string();
 		return file_name.string();
 	}
 	// Returns the "cursor" back to the top of the text file.
@@ -33,6 +43,7 @@ namespace fileio {
 				std::cout << line << std::endl;
 			}
 			resetFile(file);
+			promptContinue(file);
 		}
 		// Counts the number of words in the text file and outputs it to the console.
 		void	wordCount(std::fstream *file) {
@@ -49,6 +60,7 @@ namespace fileio {
 			}
 			std::cout << "Total word count of the file is: " << count << std::endl;
 			resetFile(file);
+			promptContinue(file);
 		}
 		// Counts the number of characters in the text file and outputs it to the console.
 		void	charCount(std::fstream  *file) {
@@ -62,6 +74,7 @@ namespace fileio {
 			}
 			std::cout << "Total character count of the file is: " << count << std::endl;
 			resetFile(file);
+			promptContinue(file);
 		}
 		// Appends text onto the end of the file.
 		void	appdText(std::fstream *file) {
@@ -72,6 +85,17 @@ namespace fileio {
 			validateInput();
 			*file << text << std::endl;
 			resetFile(file);
+			promptContinue(file);
+		}
+		void	openNewFile(std::fstream *file) {
+			(*file).close();
+			std::cout
+				<< "Please provide the name of the file to open.\n"
+				<< "The file name can be an absolute path.\n"
+				<< "Key in the file name to open: \n";
+			(*file).open(getFile(), std::ios::in | std::ios::out | std::ios::app);
+			checkFile(file);
+			promptContinue(file);
 		}
 	}
 }

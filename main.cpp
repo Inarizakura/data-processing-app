@@ -1,5 +1,5 @@
 #include "utils.hpp"
-#include <fstream>
+
 
 void launchTask(std::fstream *file, int choice) {
 	switch(choice) {
@@ -15,39 +15,48 @@ void launchTask(std::fstream *file, int choice) {
 		case 4:
 			fileio::task::appdText(file);
 			break;
+		case 5:
+			fileio::task::openNewFile(file);
+			break;
 	}
 }
 
-// Display the application menu.
-void appMenu() {
+// Display options for the tasks available to the text file.
+void promptUser(std::fstream *file) {
 	int	userChoice = 0;
 
-	std::cout 
-		<< "| Data Processing Application |\n"
-		<< "Please provide the name of the file to open before selecting a task.\n"
-		<< "The file name can be an absolute path."
-		<< "Key in the file name to open: \n";
-
-	std::fstream file(fileio::getFile(), std::ios::in | std::ios::out | std::ios::app);
-
-	if (!file.is_open()) {
-		std::cerr << "Failed to open the file. Exiting program.";
-		return;
-	} else {
-		std::cout << "\n\nSuccessfully opened the file.\n";
-		std::cout
+	std::cout
 			<< "Tasks available:\n"
 			<< "1. Print text file to console\n"
 			<< "2. Word count\n"
 			<< "3. Character count\n"
 			<< "4. Append text to end of the file\n"
-			<< "Select task to perform [1 - 4]: ";
-	}
+			<< "5. Open another file\n"
+			<< "0. Exit application\n"
+			<< "Select task to perform [1 - 5 or 0]: ";
 	do {
 		std::cin >> userChoice;
-		validateInput(userChoice, 1, 3);
-	} while(!(userChoice >= 1 && userChoice <= 3));
-	launchTask(&file, userChoice);
+		validateInput(userChoice, 0, 5);
+	} while(!(userChoice >= 0 && userChoice <= 5));
+	if (userChoice != 0) {
+		launchTask(file, userChoice);
+	}
+}
+
+// Display the application menu.
+void appMenu() {
+	std::cout 
+		<< "| Data Processing Application |\n"
+		<< "Please provide the name of the file to open before selecting a task.\n"
+		<< "The file name can be an absolute path.\n"
+		<< "Key in the file name to open: \n";
+
+	std::fstream file(fileio::getFile(), std::ios::in | std::ios::out | std::ios::app);
+
+	checkFile(&file);
+	promptUser(&file);
+	std::cout << "Exiting application.\n";
+	(file).close();
 }
 
 int main() {

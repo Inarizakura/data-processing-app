@@ -19,6 +19,7 @@ This is the capstone project for Microsoft's Intermediate C++ Programming Techni
 	- Apply best practices for code readability and maintenance
 
 4. External library integration
+\* Skipped as this application doesn't require an external library to function.
 	- Incorporate at least one external library
 	- Document the library's purpose and integration
 
@@ -43,3 +44,14 @@ Counts the number of characters in the text file and outputs the total into the 
 
 4. Append text
 Appends text onto the end of the text file.
+
+5. Open another file
+Closes the current opened text file and prompts the user for the path of the new file to open.
+
+---
+
+## Application Restrictions
+The text file has to exist.
+The application will not prompt the user to create a new file if it doesn't exist in the path provided.
+
+---
