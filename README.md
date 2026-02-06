@@ -19,7 +19,7 @@ This is the capstone project for Microsoft's Intermediate C++ Programming Techni
 	- Apply best practices for code readability and maintenance
 
 4. External library integration
-\* Skipped as this application doesn't require an external library to function.
+* Skipped as this application doesn't require an external library to function.
 	- Incorporate at least one external library
 	- Document the library's purpose and integration
 
@@ -51,7 +51,7 @@ Closes the current opened text file and prompts the user for the path of the new
 ---
 
 ## Application Restrictions
-The text file has to exist.
-The application will not prompt the user to create a new file if it doesn't exist in the path provided.
+The text file has to exist, the application will not prompt the user to create a new file if it doesn't exist in the path provided.
+Only one file can be opened at a time.
 
 ---
